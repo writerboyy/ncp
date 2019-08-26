@@ -1,0 +1,9 @@
+c标签：
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+jQuery引用：
+ <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+jsp头：
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>

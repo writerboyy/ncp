@@ -1,0 +1,14 @@
+放到tomcat的conf目录下的context.xml中
+加到<context></context>之间
+
+
+<Resource name="ncpDB"
+		auth="Container"
+		type="javax.sql.DataSource" 
+		maxActive="100" 
+		maxIdle="30"
+		maxWait="10000" 
+		username="root" 
+		password="123456"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/ncp?serverTimezone=GMT%2B8&amp;useSSL=false" />

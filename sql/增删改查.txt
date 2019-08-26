@@ -1,0 +1,63 @@
+-- ----------------------------
+--  Records 
+-- ----------------------------
+INSERT INTO `t_cart` VALUES ('1',NULL,NULL,NULL);
+INSERT INTO `t_goods` VALUES ('1','苹果','5.30','红富士',NULL,'99','1','1');
+INSERT INTO `t_order` VALUES ('1','1','5.30','2019-06-28','1');
+INSERT INTO `t_order_detail` VALUES ('1','1','1','1','5.30');
+INSERT INTO `t_type` VALUES ('1','其他'), ('2','瓜果');
+INSERT INTO `t_user` VALUES ('1','wb','wb','12345678912','','1');
+
+-- 用户操作
+INSERT INTO t_user (user_name, password,tell,address,grade) values('lg','lg','155655','','1');
+delete from t_user where user_id='2';
+update t_user set tell ='12345' where user_id='3';
+select user_name,password,tell,address,grade from t_user;
+select user_name,password,tell,address,grade from t_user where user_id = '1';
+
+-- 类别
+insert into  t_type (type_name) values ('蔬菜');
+delete from t_type where type_id='2';
+update t_type set type_name ='肉类' where type_id='3';
+select type_name from t_type;
+select type_name from t_type where type_id = '3';
+
+-- 商品
+insert into  t_goods (goods_name,price,text,pic,stock) values ('香蕉','12.5','waeuoiawu','','99');
+delete from t_goods where goods_id='2';
+update t_goods set goods_name ='西瓜' where goods_id='2';
+select goods_name,price,text,pic,stock,sales_number from t_goods;
+select goods_name,price,text,pic,stock,sales_number from t_goods where goods_id = '2';
+
+-- 订单表
+insert into t_order (user_id,order_total,order_date,status) values ('1','12.5',now(),'0');
+delete from t_order where order_id='2';
+update t_order set status ='1' where order_id='2';
+select user_id,order_total,order_date,status from t_order;
+select user_id,order_total,order_date,status from t_order where order_id='2';
+
+-- 订单明细表
+insert into t_order_detail (user_id,goods_id,order_number,price) values ('1','1','1','5.3');
+delete from t_order_detail where order_id='2';
+select order_id,user_id,goods_id,order_number,price from t_order_detail;
+select user_id,goods_id,order_number from t_order_detail where order_id='3';
+
+-- 购物车明细表
+insert into t_cart (goods_id,cart_number,price) values ('1','2','5.3')where user_id='1';
+delete from t_cart where goods_id='1'and user_id='1';
+update t_cart set cart_number ='3' where goods_id='1'and user_id='1';
+select user_id,goods_id,cart_number,price from t_cart;
+select user_id,goods_id,cart_number,price from t_cart where user_id='1';
+
+
+-- 按类别查询
+select g.goods_name,g.price,g.text,g.pic,g.stock,g.sales_number,t.type_name from t_goods g,t_type t where g.type_id=t.type_id and t.type_id='1';
+
+-- 订单查询
+
+select u.user_id,o.order_total,o.order_date,o.status,od.goods_id,od.order_number,od.price,g.goods_name
+from t_user u,t_order o,t_order_detail od,t_goods g
+where u.user_id=o.user_id and o.order_id=od.order_id and g.goods_id=od.goods_id;
+
+-- 购物车
+select c.user_id,c.goods_id,c.cart_number,c.price,g.goods_name from t_cart c,t_user u,t_goods g where u.user_id=c.user_id and c.goods_id=g.goods_id and u.user_id='1';

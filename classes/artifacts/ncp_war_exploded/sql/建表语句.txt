@@ -1,0 +1,78 @@
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+--  Table structure for `t_cart`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cart`;
+CREATE TABLE `t_cart` (
+  `user_id` int(11) NOT NULL,
+  `goods_id` int(11) DEFAULT NULL,
+  `cart_number` int(11) DEFAULT NULL,
+  `price` double(11,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `t_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_goods`;
+CREATE TABLE `t_goods` (
+  `goods_id` int(11) NOT NULL AUTO_INCREMENT,
+  `goods_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `price` double(5,2) NOT NULL,
+  `text` text COLLATE utf8_bin,
+  `pic` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `stock` int(11) DEFAULT '0',
+  `sales_number` int(11) DEFAULT '0',
+  `type_id` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`goods_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `t_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order`;
+CREATE TABLE `t_order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `order_total` double(11,2) NOT NULL,
+  `order_date` date NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `t_order_detail`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order_detail`;
+CREATE TABLE `t_order_detail` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `order_number` int(11) NOT NULL,
+  `price` double(11,2) NOT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `t_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_type`;
+CREATE TABLE `t_type` (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `t_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user`;
+CREATE TABLE `t_user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(50) COLLATE utf8_bin NOT NULL,
+  `tell` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `grade` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
